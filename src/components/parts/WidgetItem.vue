@@ -23,6 +23,7 @@
         @delete="onClickDelete"
         @addChild="onClickChildWidget"
         @addWidgetAfter="onClickAddWidgetAfter"
+        @mouseover="childWidget.mouseover = $event"
       />
     </div>
   </div>
