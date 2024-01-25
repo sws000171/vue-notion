@@ -2,7 +2,7 @@
     <div class="main-page">
       <!--左ビュー-->
       <div class="left-menu" @click.self="onEditNoteEnd()">
-        <!--ノートリストtest-->
+        <!--ノートリスト-->
         <draggable v-bind:list="noteList" group="notes">
           <NoteItem
             v-for="note in noteList"
