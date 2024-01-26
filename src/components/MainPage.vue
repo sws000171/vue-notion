@@ -33,6 +33,7 @@
           </div>
           <div class="note-content">
             <h3 class="note-title">{{selectedNote.name}}</h3>
+            <draggable v-bind:list="selectedNote.widgetList" group="widget">
             <WidgetItem
               v-for="widget in selectedNote.widgetList" 
               v-bind:widget="widget"
@@ -42,7 +43,9 @@
               @addChild ="onAddChildWidget"
               @addWidgetAfter="onAddWidgetAfter"
               @mouseover="widget.mouseover = $event"
+              @widgetType="onWidgetType"
             />
+            </draggable>
             <button class="transparent" @click="onClickButtonAddWidget">
               <i class="fas fa-plus-square"></i>ウィジェットを追加
             </button>
@@ -135,7 +138,7 @@ import draggable from 'vuedraggable'
         layer = layer || 1;
         const widget = {
           id : new Date().getTime().toString(16),
-          type : 'heading',
+          type : layer === 1 ? 'heading' : 'body',
           text : '',
           mouseover : false,
           children : [],
@@ -169,6 +172,15 @@ import draggable from 'vuedraggable'
         const targetList = (parentWidget == null ? this.selectedNote.widgetList : parentWidget.children);
         const index = targetList.indexOf(widget);
         targetList.splice(index,1);
+        //削除したひとつ前のウィジェットを選択状態にする
+        const focusWidget = (index === 0) ? parentWidget : targetList[index - 1];
+        if (focusWidget != null) {
+            focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
+        }
+      },
+      //ウィジェットタイプ選択
+      onWidgetType(widget,type){
+        widget.type = type;
       }
     },
     computed:{
