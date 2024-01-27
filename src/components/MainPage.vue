@@ -12,6 +12,7 @@
             @delete="onDeleteNote"
             @select="onSelectNote"
             @editStart="onEditNoteStart"
+            @addNoteAfter="onAddNoteAfter"
             @editEnd="onEditNoteEnd"
             @addChild="onAddChildNote"
             @mouseover="note.mouseover = $event"
