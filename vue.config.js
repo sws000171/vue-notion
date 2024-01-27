@@ -1,8 +1,14 @@
 module.exports = {
-	  devServer: {
-		      port: 8081,
-		      disableHostCheck: true,
-		      host: 'localhost'
-		    }
+	pages:{
+		index:{
+			entry:"src/main.js",
+			title:"TechpitNoton",
+		}
+	},
+	devServer: {
+		port: 8081,
+		disableHostCheck: true,
+	    host: 'localhost'
+	}
 };
 

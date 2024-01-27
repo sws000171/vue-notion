@@ -6,6 +6,9 @@ Vue.config.productionTip = false
 //VueRouter を使用
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+//vue-toasted を使用
+import Toasted from 'vue-toasted'
+Vue.use(Toasted)
 
 const router = new VueRouter({
   mode: 'history',

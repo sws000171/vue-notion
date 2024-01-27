@@ -2,6 +2,10 @@
     <div class="main-page">
       <!--左ビュー-->
       <div class="left-menu" @click.self="onEditNoteEnd()">
+        <!--保存ボタン-->
+        <button class="transparent" @click="onClickButtonSave()">
+          <i class="fas fa-save"></i> 内容を保存
+        </button>
         <!--ノートリスト-->
         <draggable v-bind:list="noteList" group="notes">
           <NoteItem
@@ -66,6 +70,12 @@ import draggable from 'vuedraggable'
       return{
         noteList : [],
         selectedNote : null,
+      }
+    },
+    created(){
+      const localData = localStorage.getItem('noteItem');
+      if (localData != null){
+        this.noteList = JSON.parse(localData);
       }
     },
     methods:{
@@ -178,6 +188,14 @@ import draggable from 'vuedraggable'
         if (focusWidget != null) {
             focusWidget.id = (parseInt(focusWidget.id, 16) + 1).toString(16);
         }
+      },
+      onClickButtonSave(){
+        localStorage.setItem('noteItem',JSON.stringify(this.noteList));
+        this.$toasted.show('ノートを保存しました',{
+          position: 'top-left',
+          duration: 1000,
+          type: 'success'
+        });
       },
       //ウィジェットタイプ選択
       onWidgetType(widget,type){
